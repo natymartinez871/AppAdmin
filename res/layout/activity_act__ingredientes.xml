@@ -1,0 +1,94 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A6AD3C"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.ayalamart.administrador.Act_Ingredientes" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <AutoCompleteTextView
+            android:id="@+id/nombre_ingrediente"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="@string/hint_nombreingr"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@string/et_nombreingr"
+            android:textColor="#ffffffff"
+            android:textColorHint="#ffffffff" />
+ 
+        <AutoCompleteTextView
+            android:id="@+id/tipo_ingrediente"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="@string/hint_tipoing"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@string/et_tipoingr"
+            android:textColor="#ffffffff"
+            android:textColorHint="#ffffffff" />
+
+        <AutoCompleteTextView
+            android:id="@+id/descripcion_ingrediente"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="Descripción ingrediente"
+            android:inputType="textMultiLine"
+            android:text="@string/et_descripcioningr"
+            android:textColor="#ffffffff" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <AutoCompleteTextView
+                android:id="@+id/precio_ingrediente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:text="@string/et_preciounit"
+                android:textColor="#ffffffff" />
+         
+            <AutoCompleteTextView
+                android:id="@+id/cantidad_ingrediente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="number"
+                android:text="@string/et_cantidad"
+                android:textColor="#ffffffff" >
+               
+            </AutoCompleteTextView>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/but_submit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/str_but_Agregar" />
+
+    </LinearLayout>
+
+</LinearLayout>
