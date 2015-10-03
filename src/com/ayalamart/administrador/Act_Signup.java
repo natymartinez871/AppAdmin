@@ -87,7 +87,7 @@ public class Act_Signup extends Activity {
 							sesion.crearSesionUSuario(name, email, nombre_str, apellido_str, cedula_str, correo_str, telefono_str);
 							
 							//					aqui deberia colocar la transicion de que logro registrarse 
-							Intent intent_ppal = new Intent(getApplicationContext(), ActPrincipal.class); 
+							Intent intent_ppal = new Intent(getApplicationContext(), Act_Ingredientes.class); 
 							intent_ppal.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
 							intent_ppal.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); 
 							startActivity(intent_ppal);

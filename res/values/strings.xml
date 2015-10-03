@@ -44,4 +44,8 @@
 
     <string name="et_descripcioningr"></string>
 
+    <string name="hint_precio_unitario">Precio Unitario</string>
+
+    <string name="hint_cant_ing">Cantidad</string>
+
 </resources>

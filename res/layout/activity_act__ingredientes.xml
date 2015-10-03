@@ -28,7 +28,7 @@
             android:text="@string/et_nombreingr"
             android:textColor="#ffffffff"
             android:textColorHint="#ffffffff" />
- 
+
         <AutoCompleteTextView
             android:id="@+id/tipo_ingrediente"
             android:layout_width="fill_parent"
@@ -51,7 +51,8 @@
             android:hint="Descripción ingrediente"
             android:inputType="textMultiLine"
             android:text="@string/et_descripcioningr"
-            android:textColor="#ffffffff" />
+            android:textColor="#ffffffff"
+            android:textColorHint="#ffffffff" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,10 +65,12 @@
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:ems="10"
+                android:hint="@string/hint_precio_unitario"
                 android:inputType="numberDecimal"
                 android:text="@string/et_preciounit"
-                android:textColor="#ffffffff" />
-         
+                android:textColor="#ffffffff"
+                android:textColorHint="#ffffffff" />
+
             <AutoCompleteTextView
                 android:id="@+id/cantidad_ingrediente"
                 android:layout_width="match_parent"
@@ -75,12 +78,12 @@
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:ems="10"
+                android:hint="@string/hint_cant_ing"
                 android:inputType="number"
                 android:text="@string/et_cantidad"
-                android:textColor="#ffffffff" >
-               
+                android:textColor="#ffffffff"
+                android:textColorHint="#ffffffff" >
             </AutoCompleteTextView>
-
         </LinearLayout>
 
         <Button
@@ -88,7 +91,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/str_but_Agregar" />
-
     </LinearLayout>
 
 </LinearLayout>

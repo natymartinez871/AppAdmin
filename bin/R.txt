@@ -816,7 +816,9 @@ int string et_preciounit 0x7f0b005b
 int string et_tipoingr 0x7f0b0058
 int string field_required 0x7f0b0048
 int string hello_world 0x7f0b003f
+int string hint_cant_ing 0x7f0b0060
 int string hint_nombreingr 0x7f0b0059
+int string hint_precio_unitario 0x7f0b005f
 int string hint_tipoing 0x7f0b005a
 int string incorrect_password 0x7f0b0047
 int string invalid_email 0x7f0b0045

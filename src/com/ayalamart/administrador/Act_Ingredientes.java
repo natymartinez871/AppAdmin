@@ -1,7 +1,23 @@
 package com.ayalamart.administrador;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.android.volley.Request.Method;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.ayalamart.helper.AppController;
+
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.HideReturnsTransformationMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,10 +32,11 @@ public class Act_Ingredientes extends AppCompatActivity {
 	private EditText descr_ingrediente; 
 	private AutoCompleteTextView precio;
 	private AutoCompleteTextView cantidad;
+	private ProgressDialog pDialog;
+	private static String TAG = Act_Ingredientes.class.getSimpleName(); 
 	
 	
-	
-	String URL_AGREG_INGREDS = "http://10.10.0.99:8080/Restaurante/rest/ingrediente/createIngrediente";
+	String URL_AGREG_INGREDS = "http://192.168.1.99:8080/Restaurante/rest/ingrediente/createIngrediente";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,7 +54,56 @@ public class Act_Ingredientes extends AppCompatActivity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
+			final String nombr_ingr_str = nombre_ingr.getText().toString();
+			final String tipo_ing_str = tipo_ingrediente.getText().toString();
+			final String descrip_ing_str = descr_ingrediente.getText().toString();
+			final String precio_str = precio.getText().toString();
+			final String cant_str = cantidad.getText().toString();
 			
+			Long idingrediente = new Long (0);
+			int idadministrador =  1;
+			
+			Calendar rightnow =Calendar.getInstance();
+			SimpleDateFormat fechaact = new SimpleDateFormat("dd-MMM-yyyy");
+			String fecha = fechaact.format(rightnow.getTime());
+			
+			JSONObject js_ingr = new JSONObject();
+			try {
+				js_ingr.put("idingrediente", idingrediente);
+				js_ingr.put("idadministrador", idadministrador);
+				js_ingr.put("nomingrediente", nombr_ingr_str);
+				js_ingr.put("descingrediente", descrip_ing_str);
+				js_ingr.put("tipoingrediente", tipo_ing_str);
+				js_ingr.put("precioingrediente", precio_str);
+				js_ingr.put("fecha", fecha);
+				js_ingr.put("cantstock", cant_str);
+				js_ingr.put("estatus", "1");
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			showpDialog(); 
+			JsonObjectRequest json_objreq = new JsonObjectRequest(Method.POST, URL_AGREG_INGREDS, js_ingr, null, new  Response.ErrorListener() {
+				
+				@Override
+				public void onErrorResponse(VolleyError error) {
+					VolleyLog.d(TAG, "Error: " + error.getMessage());
+
+					Log.d(TAG, "Error: " + error.getMessage()); 
+					/*Toast.makeText(getApplicationContext(),
+									error.getMessage(), Toast.LENGTH_SHORT).show();
+					 */
+					// hide the progress dialog
+					hidepDialog();
+				}
+			
+			
+			});
+			hidepDialog();
+			AppController.getInstance().addToRequestQueue(json_objreq);
+		
+		
 		}
 	});
 	
@@ -61,4 +127,14 @@ public class Act_Ingredientes extends AppCompatActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	private void showpDialog() {
+		if (!pDialog.isShowing())
+			pDialog.show();
+	}
+
+	private void hidepDialog() {
+		if (pDialog.isShowing())
+			pDialog.dismiss();
+	}
+
 }

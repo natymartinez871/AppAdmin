@@ -63,7 +63,7 @@ public class Act_login extends AppCompatActivity {
         pDialog.setCancelable(false);
         
 		if (sesion.estaLogeadoelUsuario()) {
-			Intent intent_ppal = new Intent(getApplicationContext(), ActPrincipal.class); 
+			Intent intent_ppal = new Intent(getApplicationContext(), Act_Ingredientes.class); 
 			intent_ppal.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
 			intent_ppal.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); 
 			startActivity(intent_ppal);
@@ -155,7 +155,7 @@ public class Act_login extends AppCompatActivity {
 		signUpTextView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent_signup = new Intent(getApplicationContext(), Act_Signup.class); 
+				Intent intent_signup = new Intent(getApplicationContext(), Act_Ingredientes.class); 
 				intent_signup.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
 				intent_signup.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); 
 				startActivity(intent_signup);
