@@ -79,7 +79,7 @@ public class Act_Ingredientes extends AppCompatActivity {
 			
 			try {
 				js_ingr.put("idingrediente", idingrediente);
-				 js_ingr.put("idadministrador", idadministrador);
+				js_ingr.put("idadministrador", idadministrador);
 				js_ingr.put("nomingrediente", nombr_ingr_str);
 				js_ingr.put("descingrediente", descrip_ing_str);
 				js_ingr.put("tipoingrediente", tipo_ing_str);
