@@ -12,14 +12,14 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-         android:name="com.ayalamart.helper.AppController"
+        android:name="com.ayalamart.helper.AppController"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Act_Ingredientes"
-            android:label="@string/app_name" >
+            android:name=".Act_login"
+            android:label="@string/title_activity_act__login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,12 +27,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Act_login"
+            android:name=".Act_Ingredientes"
             android:label="@string/title_activity_act__ingredientes" >
         </activity>
         <activity
             android:name=".ActPrincipal"
             android:label="@string/title_activity_act_principal" >
+        </activity>
+        <activity
+            android:name=".Act_Signup"
+            android:label="@string/title_activity_act__signup" >
+        </activity>
+        <activity
+            android:name=".Act_PlatosMenu"
+            android:label="@string/title_activity_plato__menu" >
         </activity>
     </application>
 
