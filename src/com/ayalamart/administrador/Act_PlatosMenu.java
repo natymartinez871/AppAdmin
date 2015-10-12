@@ -20,6 +20,7 @@ import com.ayalamart.helper.AppController;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -34,12 +35,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Act_PlatosMenu extends ListActivity {
-	String url_IngredientesAll = "http://192.168.1.149:8080/Restaurante/rest/ingrediente/getIngredientesAll"; 
-	
-	String url_Crearplato = "http://192.168.1.149:8080/Restaurante/rest/plato/createPlato"; 
-String url_IngredientesAll_n = "http://10.10.0.99:8080/Restaurante/rest/ingrediente/getIngredientesAll"; 
-	
-	String url_Crearplato_n = "http://10.10.0.99:8080/Restaurante/rest/plato/createPlato"; 
+	String url_IngredientesAll = "http://192.168.1.99:8080/Restaurante/rest/ingrediente/getIngredientesAll"; 
+	String url_Crearplato = "http://192.168.1.99:8080/Restaurante/rest/plato/createPlato"; 
+	String url_IngredientesAll_N = "http://10.10.0.99:8080/Restaurante/rest/ingrediente/getIngredientesAll"; 
+	String url_Crearplato_N = "http://10.10.0.99:8080/Restaurante/rest/plato/createPlato"; 
 
 	private static String TAG = Act_PlatosMenu.class.getSimpleName();
 	private ProgressDialog pDialog;
@@ -86,11 +85,13 @@ String url_IngredientesAll_n = "http://10.10.0.99:8080/Restaurante/rest/ingredie
 						String idingrediente = ingrediente.getString("idingrediente").toString(); 
 						ingrediente.getString("tipoingrediente");
 						String tipoingrediente = ingrediente.getString("tipoingrediente").toString(); 
-
-
-						data.add(new PostData(nombre , false));
+						
+						
+						
+						data.add(new PostData(nombre , false, "0"));
 					}
 					base = response; 
+					
 					setListAdapter(adapter);
 
 				}catch(JSONException e) {
@@ -108,7 +109,7 @@ String url_IngredientesAll_n = "http://10.10.0.99:8080/Restaurante/rest/ingredie
 			public void onErrorResponse(VolleyError error) {
 				VolleyLog.d(TAG, "Error: " + error.getMessage());
 				Toast.makeText(getApplicationContext(),
-						error.getMessage(), Toast.LENGTH_SHORT).show();
+						error.getMessage() + " error de respuesta del servidor", Toast.LENGTH_SHORT).show();
 				hidepDialog();
 			}
 		}); 
@@ -122,6 +123,7 @@ String url_IngredientesAll_n = "http://10.10.0.99:8080/Restaurante/rest/ingredie
 			@Override
 			public void onClick(View v) {
 				showpDialog();
+				
 				if (adapter.haveSomethingSelected()) {
 
 					int cuenta = data.size(); 
@@ -158,14 +160,7 @@ String url_IngredientesAll_n = "http://10.10.0.99:8080/Restaurante/rest/ingredie
 					Calendar rightnow =Calendar.getInstance();
 					SimpleDateFormat fechaact = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 					String fecha = fechaact.format(rightnow.getTime());
-					/*
-					 * 	plato.setNomplato("Parrilla");
-				plato.setPrecplato(new BigDecimal(769));
-				plato.setDescplato("Parrilla");
-				plato.setEstatus("1");
-				plato.setIdplato(new Long(0));
-				plato.setFecha("2015-09-19");
-				plato.setImgplato("");*/
+			
 
 					try {
 						plato.put("nomplato", nombreplato_str);
@@ -180,10 +175,11 @@ String url_IngredientesAll_n = "http://10.10.0.99:8080/Restaurante/rest/ingredie
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} 
+					Log.d(TAG, plato.toString()); 
 
 					JsonObjectRequest AgregplatoREQ = new JsonObjectRequest(Method.POST, 
 							url_Crearplato, plato, null, new Response.ErrorListener() {
-
+ 
 						@Override
 						public void onErrorResponse(VolleyError error) {
 							// TODO Auto-generated method stub
@@ -201,10 +197,15 @@ String url_IngredientesAll_n = "http://10.10.0.99:8080/Restaurante/rest/ingredie
 				else{
 					Toast.makeText(getApplicationContext(), "no ha seleccionado ingredientes", Toast.LENGTH_SHORT).show(); 
 				}
-
+				nombrePlato.clearComposingText();
+				URL_Ingr.clearComposingText();
+				descripcionPlato.clearComposingText();			
+				
+				Intent int_ppal = new Intent(getApplicationContext(), ActPrincipal.class); 
+				startActivity(int_ppal);	
 			}
 		});
-
+	
 	}
 
 	@Override
@@ -221,14 +222,14 @@ String url_IngredientesAll_n = "http://10.10.0.99:8080/Restaurante/rest/ingredie
 
 
 
-/*
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.plato__menu, menu);
 		return true;
 	}
-*/ 
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -240,7 +241,7 @@ String url_IngredientesAll_n = "http://10.10.0.99:8080/Restaurante/rest/ingredie
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	 
 	private void showpDialog() {
 		if (!pDialog.isShowing())
 			pDialog.show();

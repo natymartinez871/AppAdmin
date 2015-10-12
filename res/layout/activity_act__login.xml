@@ -11,8 +11,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".LoginActivity" 
-    >
+    tools:context=".LoginActivity" >
 
     <LinearLayout
         android:id="@+id/ll1"
@@ -20,7 +19,8 @@
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:gravity="center_vertical|center_horizontal" >
-        
+
+        <!-- android:background="@drawable/logo" -->
 
         <TextView
             android:id="@+id/nombre_login"
