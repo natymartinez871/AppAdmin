@@ -3,6 +3,7 @@ package com.ayalamart.adapter;
 import java.util.ArrayList;
 
 import com.ayalamart.administrador.R;
+import com.ayalamart.modelo.PostData;
 
 import android.content.Context;
 import android.text.Editable;

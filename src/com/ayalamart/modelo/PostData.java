@@ -1,4 +1,4 @@
-package com.ayalamart.adapter;
+package com.ayalamart.modelo;
 
 import android.os.Parcel;
 import android.os.Parcelable;

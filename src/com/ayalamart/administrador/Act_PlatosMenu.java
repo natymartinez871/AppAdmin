@@ -15,8 +15,8 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.ayalamart.adapter.PostAdapter;
-import com.ayalamart.adapter.PostData;
 import com.ayalamart.helper.AppController;
+import com.ayalamart.modelo.PostData;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;

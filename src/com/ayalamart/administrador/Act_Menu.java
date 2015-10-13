@@ -28,6 +28,7 @@ public class Act_Menu extends Activity{
 	private static final String TAG = Act_Menu.class.getSimpleName(); 
 	
 	private static String Url = "http://api.androidhive.info/json/movies.json"; 
+	private static String URL_Platos_N = "http://10.10.0.99:8080/Restaurante/rest/plato/getPlatosAll"; 
 	 private ProgressDialog pDialog;
 	 private List<Plato> listaPlato = new ArrayList<Plato>(); 
 	 private CustomListAdapter adapter; 
@@ -66,7 +67,7 @@ public class Act_Menu extends Activity{
 		pDialog.show(); 
 		
 		
-		JsonArrayRequest platoReq = new JsonArrayRequest(Url, new Response.Listener<JSONArray>() {
+		JsonArrayRequest platoReq = new JsonArrayRequest(URL_Platos_N, new Response.Listener<JSONArray>() {
 			
 			public void onResponse(JSONArray response){
 				Log.d(TAG, response.toString()); 
@@ -76,10 +77,10 @@ public class Act_Menu extends Activity{
 					try {
 						final JSONObject obj = response.getJSONObject(i); 
 						Plato plato = new Plato(); 
-						plato.setTitulo(obj.getString("title"));
-						plato.setThumbnail(obj.getString("image"));
-						plato.setDescripcion(obj.getString("title"));
-						plato.setPrecio(obj.getInt("releaseYear"));
+						plato.setTitulo(obj.getString("nomplato"));
+						plato.setThumbnail(obj.getString("imgplato"));
+						plato.setDescripcion(obj.getString("descplato"));
+						plato.setPrecio(obj.getDouble("precplato"));
 						listaPlato.add(plato);		
 					} catch (JSONException e) {
 						e.printStackTrace();
