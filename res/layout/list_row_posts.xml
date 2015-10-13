@@ -2,18 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" 
     android:gravity="right"
-   
-    >
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/tvCantStock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/tvNombreIng"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:textColor="#FFFFFF"
-         />
+        android:textColor="#FFFFFF" />
 
     <CheckBox
         android:id="@+id/cbescogido"
@@ -27,8 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
-        android:textColor="#FFFFFF"
-        android:inputType="numberDecimal" >
+        android:inputType="numberDecimal"
+        android:textColor="#FFFFFF" >
     </EditText>
 
 </LinearLayout>

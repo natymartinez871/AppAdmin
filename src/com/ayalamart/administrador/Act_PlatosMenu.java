@@ -35,10 +35,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Act_PlatosMenu extends ListActivity {
-	String url_IngredientesAll = "http://192.168.1.99:8080/Restaurante/rest/ingrediente/getIngredientesAll"; 
-	String url_Crearplato = "http://192.168.1.99:8080/Restaurante/rest/plato/createPlato"; 
-	String url_IngredientesAll_N = "http://10.10.0.99:8080/Restaurante/rest/ingrediente/getIngredientesAll"; 
-	String url_Crearplato_N = "http://10.10.0.99:8080/Restaurante/rest/plato/createPlato"; 
+	String url_IngredientesAll_J = "http://192.168.1.99:8080/Restaurante/rest/ingrediente/getIngredientesAll"; 
+	String url_Crearplato_J = "http://192.168.1.99:8080/Restaurante/rest/plato/createPlato"; 
+	String url_IngredientesAll = "http://10.10.0.99:8080/Restaurante/rest/ingrediente/getIngredientesAll"; 
+	String url_Crearplato = "http://10.10.0.99:8080/Restaurante/rest/plato/createPlato"; 
 
 	private static String TAG = Act_PlatosMenu.class.getSimpleName();
 	private ProgressDialog pDialog;
@@ -70,25 +70,17 @@ public class Act_PlatosMenu extends ListActivity {
 					for (int i = 0; i < response.length(); i++) {
 						JSONObject ingrediente = (JSONObject)response.get(i);
 						ingrediente.getString("cantstock"); 
-						String cantstock = ingrediente.getString("cantstock").toString(); 
-						ingrediente.getString("nomingrediente"); 
-						String nombre = ingrediente.getString("nomingrediente").toString(); 
-						ingrediente.getString("precioingrediente"); 
-						String precio = ingrediente.getString("precioingrediente").toString();
-						ingrediente.getString("descingrediente"); 
-						String descingrediente = ingrediente.getString("descingrediente").toString(); 
-						ingrediente.getString("estatus"); 
-						String estatus = ingrediente.getString("estatus").toString(); 
-						ingrediente.getString("fecha"); 
-						String fecha = ingrediente.getString("fecha").toString(); 
-						ingrediente.getString("idingrediente");
-						String idingrediente = ingrediente.getString("idingrediente").toString(); 
+						ingrediente.getString("nomingrediente"); 						
+						ingrediente.getString("precioingrediente"); 						
+						ingrediente.getString("descingrediente"); 						
+						ingrediente.getString("estatus"); 						
+						ingrediente.getString("fecha"); 						
+						ingrediente.getString("idingrediente");						
 						ingrediente.getString("tipoingrediente");
-						String tipoingrediente = ingrediente.getString("tipoingrediente").toString(); 
-						
-						
-						
-						data.add(new PostData(nombre , false, "0"));
+
+						String nombre = ingrediente.getString("nomingrediente").toString(); 
+						String cantStock = ingrediente.getString("cantstock").toString(); 
+						data.add(new PostData(nombre , false, "0", cantStock));
 					}
 					base = response; 
 					
@@ -118,8 +110,10 @@ public class Act_PlatosMenu extends ListActivity {
 
 		Button but_crear = (Button)findViewById(R.id.but_agregar_plato); 
 		but_crear.setOnClickListener(new OnClickListener() {
-			JSONObject plato = new JSONObject(); 
-			JSONObject ingrediente_n = new JSONObject(); 
+			JSONArray plato = new JSONArray(); 
+			JSONObject ingred = new JSONObject(); 
+			JSONObject plato_tot = new JSONObject(); 
+			//JSONObject ingrediente_n = new JSONObject(); 
 			@Override
 			public void onClick(View v) {
 				showpDialog();
@@ -133,15 +127,29 @@ public class Act_PlatosMenu extends ListActivity {
 						if (data.get(i).getChecked())
 						{
 							try {
-								JSONObject ingred = base.getJSONObject(i);
-								String iding_str = ingred.get("idingrediente").toString(); 
+								ingred = base.getJSONObject(i);
+						/*		String iding_str = ingred.get("idingrediente").toString(); 
 								String nomingr_str = ingred.getString("nomingrediente").toString(); 
+								String cantstock = ingred.getString("cantstock").toString(); 
+								String precio = ingred.getString("precioingrediente").toString();
+								String descingrediente = ingred.getString("descingrediente").toString(); 
+								String estatus = ingred.getString("estatus").toString(); 
+								String fecha = ingred.getString("fecha").toString(); 
+								String tipoingrediente = ingred.getString("tipoingrediente").toString(); 
+								
 								ingrediente_n.put("nomingrediente", nomingr_str); 
 								ingrediente_n.put("idingrediente", iding_str); 
-								Log.d(TAG, "Objeto JSON"+ ingred.toString()); 
+								ingrediente_n.put("cantstock", cantstock); 
+								ingrediente_n.put("precioingrediente", precio); 
+								ingrediente_n.put("descingrediente", descingrediente); 
+								ingrediente_n.put("estatus", estatus); 
+								ingrediente_n.put("fecha", fecha); 
+								ingrediente_n.put("tipoingrediente", tipoingrediente); 
+		
+							*/
 								String precio_i = ingred.get("precioingrediente").toString(); 
 								subtotal = Double.valueOf(precio_i).doubleValue() + subtotal; 
-								plato.put("ingrediente", ingrediente_n); 
+								plato.put(ingred); 
 							} catch (JSONException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -149,7 +157,7 @@ public class Act_PlatosMenu extends ListActivity {
 						}else
 							Log.d(TAG, "ingrediente no seleccionado" + datosel); 
 					}
-
+					
 					Double total = subtotal*0.35 + subtotal; 
 					Log.d(TAG, total.toString()); 
 					adapter.cancelSelectedPost();
@@ -163,22 +171,23 @@ public class Act_PlatosMenu extends ListActivity {
 			
 
 					try {
-						plato.put("nomplato", nombreplato_str);
-						plato.put("precplato", total);
-						plato.put("descplato", desctipcionplato_str); 
-						plato.put("estatus", "1"); 
-						plato.put("idplato", idplato);
-						plato.put("fecha", fecha); 
-						plato.put("imgplato", urlplato_str); 
+						plato_tot.put("nomplato", nombreplato_str);
+						plato_tot.put("precplato", total);
+						plato_tot.put("descplato", desctipcionplato_str); 
+						plato_tot.put("estatus", "1"); 
+						plato_tot.put("idplato", idplato);
+						plato_tot.put("fecha", fecha); 
+						plato_tot.put("imgplato", urlplato_str); 
+						plato_tot.put("ingredientes", plato); 
 
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} 
-					Log.d(TAG, plato.toString()); 
+					Log.d(TAG, "TODOELPLATO" +  plato_tot.toString()); 
 
 					JsonObjectRequest AgregplatoREQ = new JsonObjectRequest(Method.POST, 
-							url_Crearplato, plato, null, new Response.ErrorListener() {
+							url_Crearplato, plato_tot, null, new Response.ErrorListener() {
  
 						@Override
 						public void onErrorResponse(VolleyError error) {
@@ -187,8 +196,6 @@ public class Act_PlatosMenu extends ListActivity {
 
 							Log.d(TAG, "Error CON S1: " + error.getMessage()); 
 							hidepDialog();
-
-
 						}
 					}); 
 					AppController.getInstance().addToRequestQueue(AgregplatoREQ);
@@ -196,10 +203,7 @@ public class Act_PlatosMenu extends ListActivity {
 				}
 				else{
 					Toast.makeText(getApplicationContext(), "no ha seleccionado ingredientes", Toast.LENGTH_SHORT).show(); 
-				}
-				nombrePlato.clearComposingText();
-				URL_Ingr.clearComposingText();
-				descripcionPlato.clearComposingText();			
+				}		
 				
 				Intent int_ppal = new Intent(getApplicationContext(), ActPrincipal.class); 
 				startActivity(int_ppal);	

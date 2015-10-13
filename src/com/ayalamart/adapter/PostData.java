@@ -8,18 +8,20 @@ public class PostData implements Parcelable {
 	private String titulo;
 	private boolean escogido;
 	private String cantidad; 
+	private String cantstock; 
 
-	public PostData(String Nombre, boolean checked, String Cantidad) {
+	public PostData(String Nombre, boolean checked, String Cantidad, String Cantstock) {
 		this.titulo = Nombre;
 		this.escogido = checked;
 		this.cantidad = Cantidad; 
-
+		this.cantstock = Cantstock; 
 	}
 	
 	
 	public PostData(Parcel in){
 		this.titulo= in.readString();
 		this.cantidad = in.readString(); 
+		this.cantstock = in.readString(); 
 		this.escogido = in.readInt() == 1 ? true:false;
 		
 	}
@@ -38,12 +40,18 @@ public class PostData implements Parcelable {
 	public String getCantidad(){
 		return cantidad; 
 	}
+	public String getCantStock() {
+		return cantstock; 
+	}
 
 	public void setNombres(String Nombres) {
 		this.titulo = Nombres;
 	}
 	public void setCantidad(String Cantidades){
 		this.cantidad = Cantidades; 
+	}
+	public void setCantStock(String CantStock){
+		this.cantstock = CantStock; 
 	}
 
 	@Override
@@ -55,6 +63,7 @@ public class PostData implements Parcelable {
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(getNombres());
 		dest.writeString(getCantidad());
+		dest.writeString(getCantStock());
 		dest.writeInt(getChecked() ? 1 : 0);
 	}
 
