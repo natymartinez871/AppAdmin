@@ -37,14 +37,12 @@ import android.widget.Toast;
 public class Act_PlatosMenu extends ListActivity {
 	String url_IngredientesAll_J = "http://192.168.1.99:8080/Restaurante/rest/ingrediente/getIngredientesAll"; 
 	String url_Crearplato_J = "http://192.168.1.99:8080/Restaurante/rest/plato/createPlato"; 
-	String url_IngredientesAll = "http://10.10.0.99:8080/Restaurante/rest/ingrediente/getIngredientesAll"; 
-	String url_Crearplato = "http://10.10.0.99:8080/Restaurante/rest/plato/createPlato"; 
-
+	String url_IngredientesAll_N = "http://10.10.0.99:8080/Restaurante/rest/ingrediente/getIngredientesAll"; 
+	String url_Crearplato_N = "http://10.10.0.99:8080/Restaurante/rest/plato/createPlato"; 
+	String url_IngredientesAll = "http://10.0.2.2:8080/Restaurante/rest/ingrediente/getIngredientesAll"; 
+	String url_Crearplato = "http://10.0.2.2:8080/Restaurante/rest/plato/createPlato"; 
 	private static String TAG = Act_PlatosMenu.class.getSimpleName();
-	private ProgressDialog pDialog;
-	JSONArray resultado; 
-
-	Spinner campoIngr ;
+	private ProgressDialog pDialog;	
 	private PostAdapter adapter;
 	private ArrayList<PostData> data;
 	private JSONArray base; 
@@ -83,7 +81,7 @@ public class Act_PlatosMenu extends ListActivity {
 						data.add(new PostData(nombre , false, "0", cantStock));
 					}
 					base = response; 
-					
+
 					setListAdapter(adapter);
 
 				}catch(JSONException e) {
@@ -113,11 +111,10 @@ public class Act_PlatosMenu extends ListActivity {
 			JSONArray plato = new JSONArray(); 
 			JSONObject ingred = new JSONObject(); 
 			JSONObject plato_tot = new JSONObject(); 
-			//JSONObject ingrediente_n = new JSONObject(); 
 			@Override
 			public void onClick(View v) {
 				showpDialog();
-				
+
 				if (adapter.haveSomethingSelected()) {
 
 					int cuenta = data.size(); 
@@ -128,25 +125,6 @@ public class Act_PlatosMenu extends ListActivity {
 						{
 							try {
 								ingred = base.getJSONObject(i);
-						/*		String iding_str = ingred.get("idingrediente").toString(); 
-								String nomingr_str = ingred.getString("nomingrediente").toString(); 
-								String cantstock = ingred.getString("cantstock").toString(); 
-								String precio = ingred.getString("precioingrediente").toString();
-								String descingrediente = ingred.getString("descingrediente").toString(); 
-								String estatus = ingred.getString("estatus").toString(); 
-								String fecha = ingred.getString("fecha").toString(); 
-								String tipoingrediente = ingred.getString("tipoingrediente").toString(); 
-								
-								ingrediente_n.put("nomingrediente", nomingr_str); 
-								ingrediente_n.put("idingrediente", iding_str); 
-								ingrediente_n.put("cantstock", cantstock); 
-								ingrediente_n.put("precioingrediente", precio); 
-								ingrediente_n.put("descingrediente", descingrediente); 
-								ingrediente_n.put("estatus", estatus); 
-								ingrediente_n.put("fecha", fecha); 
-								ingrediente_n.put("tipoingrediente", tipoingrediente); 
-		
-							*/
 								String precio_i = ingred.get("precioingrediente").toString(); 
 								subtotal = Double.valueOf(precio_i).doubleValue() + subtotal; 
 								plato.put(ingred); 
@@ -157,7 +135,7 @@ public class Act_PlatosMenu extends ListActivity {
 						}else
 							Log.d(TAG, "ingrediente no seleccionado" + datosel); 
 					}
-					
+
 					Double total = subtotal*0.35 + subtotal; 
 					Log.d(TAG, total.toString()); 
 					adapter.cancelSelectedPost();
@@ -168,7 +146,7 @@ public class Act_PlatosMenu extends ListActivity {
 					Calendar rightnow =Calendar.getInstance();
 					SimpleDateFormat fechaact = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 					String fecha = fechaact.format(rightnow.getTime());
-			
+
 
 					try {
 						plato_tot.put("nomplato", nombreplato_str);
@@ -188,10 +166,10 @@ public class Act_PlatosMenu extends ListActivity {
 
 					JsonObjectRequest AgregplatoREQ = new JsonObjectRequest(Method.POST, 
 							url_Crearplato, plato_tot, null, new Response.ErrorListener() {
- 
+
 						@Override
 						public void onErrorResponse(VolleyError error) {
-							// TODO Auto-generated method stub
+
 							VolleyLog.d(TAG, "Error: " + error.getMessage());
 
 							Log.d(TAG, "Error CON S1: " + error.getMessage()); 
@@ -204,12 +182,12 @@ public class Act_PlatosMenu extends ListActivity {
 				else{
 					Toast.makeText(getApplicationContext(), "no ha seleccionado ingredientes", Toast.LENGTH_SHORT).show(); 
 				}		
-				
+
 				Intent int_ppal = new Intent(getApplicationContext(), ActPrincipal.class); 
 				startActivity(int_ppal);	
 			}
 		});
-	
+
 	}
 
 	@Override
@@ -226,7 +204,7 @@ public class Act_PlatosMenu extends ListActivity {
 
 
 
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -245,7 +223,7 @@ public class Act_PlatosMenu extends ListActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	 
+
 	private void showpDialog() {
 		if (!pDialog.isShowing())
 			pDialog.show();

@@ -28,7 +28,8 @@ public class Act_Menu extends Activity{
 	private static final String TAG = Act_Menu.class.getSimpleName(); 
 	
 	private static String Url = "http://api.androidhive.info/json/movies.json"; 
-	private static String URL_Platos_N = "http://10.10.0.99:8080/Restaurante/rest/plato/getPlatosAll"; 
+	private static String URL_Platos = "http://10.10.0.99:8080/Restaurante/rest/plato/getPlatosAll"; 
+	private static String URL_Platos_N = "http://10.0.2.2:8080/Restaurante/rest/plato/getPlatosAll"; 
 	 private ProgressDialog pDialog;
 	 private List<Plato> listaPlato = new ArrayList<Plato>(); 
 	 private CustomListAdapter adapter; 

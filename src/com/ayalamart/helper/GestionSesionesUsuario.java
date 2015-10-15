@@ -51,7 +51,8 @@ public class GestionSesionesUsuario {
 	}
 
 	public void crearSesionUSuario(String name, String email, String nombre_str, String apellido_str,
-			String cedula_str, String correo_str, String telefono_str, String contrasena_str, String tipocliente_str, String idcliente_str){
+			String cedula_str, String correo_str, String telefono_str, String contrasena_str, 
+			String tipocliente_str, String idcliente_str){
 		editor_ap.putBoolean(USUARIO_LOGGEADO, true); 
 		editor_ap.putString(PREFER_NAME, name); 
 		editor_ap.putString(KEY_EMAIL, email); 

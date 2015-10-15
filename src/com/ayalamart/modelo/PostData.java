@@ -16,7 +16,7 @@ public class PostData implements Parcelable {
 		this.cantidad = Cantidad; 
 		this.cantstock = Cantstock; 
 	}
-	
+
 	
 	public PostData(Parcel in){
 		this.titulo= in.readString();
